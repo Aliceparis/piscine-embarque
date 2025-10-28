@@ -15,24 +15,18 @@ int main()
     DDRD &= ~BOUTTON;
     PORTD |= BOUTTON;
 
-    bool led_state = false;
-    bool botton_state = true;
+    bool botton_state = false;
 
     while (1)
     {
-        bool pressed = (PIND & BOUTTON);
-        if (!pressed && botton_state)
-        {
-            led_state = !led_state;
-            if (led_state)
-                PORTB |= LED;
-            else
-                PORTB &= ~LED;
-           
-        }
-        botton_state = pressed;
-         _delay_us(10);
-    }
+        bool    pressed = PIND & BOUTTON;
 
+        if (!pressed)
+        {
+            PORTB |= LED;
+        }
+        else
+            PORTB &= ~LED;
+    }
     return 0;
 }

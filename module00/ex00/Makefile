@@ -5,6 +5,7 @@ OBJ = $(SRC:.c=.o)
 
 CC = avr-gcc
 FLAGS = -mmcu=atmega328p -D F_CPU=10000000UL
+BAUDRATE = 115200 
 
 
 all: $(NAME).elf $(NAME).hex $(NAME).bin
@@ -23,7 +24,11 @@ $(NAME).hex: $(NAME).elf
 hex: $(NAME).bin $(NAME).hex
 
 flash: $(NAME).hex 
-	avrdude -p atmega328p -c arduino -P /dev/ttyUSB0 -U flash:w:$(NAME).hex
+	avrdude -p atmega328p \
+			-b $(BAUDRATE) \
+			-c arduino \
+			-P /dev/ttyUSB0 \
+			-U flash:w:$(NAME).hex
 
 clean: 
 	rm -rf $(NAME).bin $(NAME).hex $(OBJ)

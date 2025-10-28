@@ -1,4 +1,4 @@
-NAME = ex01
+NAME = ex03
 
 SRC = main.c
 OBJ = $(SRC:.c=.o)
